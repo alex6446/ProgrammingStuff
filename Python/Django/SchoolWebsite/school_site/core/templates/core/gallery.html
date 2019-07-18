@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+	<h2 align="center" class="section-title">Шкільна галерея</h2>
+	<!-- <hr class="hr-yellow" style="width: 50%;"> -->
+	<br>
+	<div class="row">
+	<div class="card-columns">
+		{% for folder in gallery %}
+			<div class="card bg-white shadow rounded-0 border-0">
+				<a href="{% url 'gallery-detail' folder.id %}">
+					<img class="card-img rounded-0" src="{{ folder.images.first.image.url }}">
+					<div class="card-text p-2">
+						<span class="">{{ folder.date_posted|date:"d.m.Y" }}</span><br>
+						<b>{{ folder.title }}</b>
+					</div>
+				</a>
+			</div>
+		{% endfor %}
+	</div>
+	</div>
+
+	<!-- <br> -->
+	<br>
+	<div align="center" class="btn-page">
+		{% if gallery.has_previous %}
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ gallery.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+		{% endif %}
+
+		{% for num in gallery.paginator.page_range %}
+			{% if gallery.number == num %}
+				<a class="btn btn-info mb-4 rounded-0" href="?page={{ num }}"><b>{{ num }}</b></a>
+			{% elif num > gallery.number|add:'-3' and num < gallery.number|add:'+3' %}
+				<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ num }}"><b>{{ num }}</b></a>
+			{% endif %}
+		{% endfor %}
+
+		{% if gallery.has_next %}
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ gallery.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ gallery.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+		{% endif %}
+	</div>
+
+
+ 
+{% endblock content %}

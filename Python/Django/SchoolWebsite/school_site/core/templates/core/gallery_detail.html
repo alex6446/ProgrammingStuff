@@ -1,0 +1,27 @@
+{% extends 'core/base.html' %}
+{% block content %}
+	<h2 align="center" class="section-title">{{ object.title }}</h2>
+	<hr class="hr-yellow" style="width: 50%;">
+	<p>{{ object.description|safe }}</p>
+	<div class="row mt-4">
+	<div class="card-columns">
+		{% for picture in object.images.all %}
+		
+				<div class="card shadow rounded-0 border-0 ">
+					{% if picture.title %}
+					<a href="{{ picture.image.url }}" data-toggle="lightbox" data-gallery="gallery" data-footer="{{ picture.title }}">
+						<img src="{{ picture.image.url }}" class="card-img rounded-0" >
+					</a>
+					{% else %}
+					<a href="{{ picture.image.url }}" data-toggle="lightbox" data-gallery="gallery">
+						<img src="{{ picture.image.url }}" class="card-img rounded-0" >
+					</a>
+					{% endif %}
+				</div>
+			<!-- </div> -->
+		{% endfor %}
+	</div>
+	</div>
+
+	
+{% endblock content %}

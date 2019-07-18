@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+	<div class="row justify-content-center">
+		<div class="col-md-12">
+			<h2 align="center" class="section-title">Зв'яжіться з нами</h2>
+			<br>
+		</div>
+		<div class="col-md-11">
+			<div class="row">
+				<div class="col-md-6 contact-panel-mail">
+					<form method="post">
+						{% csrf_token %}
+						<fieldset class="form-group">
+							{{ form.name }}<br>
+							{{ form.email }}<br>
+							{{ form.message }}
+						</fieldset>
+						<div class="form-group">
+							<button class="btn rounded-0 float-right" type="submit">Відправити</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-6 contact-panel-adress">
+					{% for show in info %}
+						{{ show.information|safe }}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

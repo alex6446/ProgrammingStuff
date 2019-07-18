@@ -1,0 +1,156 @@
+{% extends 'core/base.html' %}
+{% block content %}
+	{% if background_home %}
+		<div class="home-background-height"></div>
+	{% endif %}
+	<div class="container-fluid content-margin">
+	<div class="row justify-content-center no-gutters">
+		<!-- <div class="col-md-12">
+			<h1 align="center">Welcome</h1>
+		</div> -->
+		{% if events %}
+		<div class="col-md-10">
+			<div class=" mb-3 bg-white">
+		{% else %}
+		<div class="col-md-11">
+			<div class=" mb-3 bg-white shadow">
+		{% endif %}
+				<div class=" row no-gutters">
+				{% if events %}
+					<div class="col-md-6">
+						<div class="p-5">
+						<div class="p-1 welcome-panel">
+						{% for welcome in about %}
+							<div class="row no-gutters">
+								<div class="col-md-12">
+								{% if welcome.image %}
+									<img src="{{ welcome.image.url }}" width=100% ><br><br>
+								{% endif %}
+								</div>
+								<div class="col-md-12">
+									<h3>{{ welcome.title }}</h3>
+									<span class="welcome-preview"><p>{{ welcome.content|safe|truncatewords_html:"45" }}</p></span>
+									<!-- <div class="short-post-preview welcome-preview">
+										{# welcome.content|safe #}
+									</div> -->
+									<div class="grey-link">
+										<a href="{% url 'core-about' %}" class="welcome-preview"><u>Детальніше</u></a>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+						</div>
+						</div>
+					</div>
+				{% else %}
+					<div class="col-md-12">
+						<div class=""> <!-- p-4 -->
+						<div class=" welcome-panel"> <!-- p-1 -->
+						{% for welcome in about %}
+							<div class="row no-gutters">
+								{% if welcome.image %}
+								<div class="col-md-6 "> <!-- p-3 -->
+									<img src="{{ welcome.image.url }}" width=100% >
+								</div>
+								<div class="col-md-6 p-4"> <!-- p-3 -->
+								{% else %}
+								<div class="col-md-12 p-4"> <!-- p-3 -->
+								{% endif %}
+									<h3>{{ welcome.title }}</h3>
+									<span class="welcome-preview"><p>{{ welcome.content|safe|truncatewords_html:"45" }}</p></span>
+									<!-- <div class="short-post-preview welcome-preview">
+										{# welcome.content|safe #}
+									</div> -->
+									<div class="grey-link">
+										<a href="{% url 'core-about' %}" class="welcome-preview"><u>Детальніше</u></a>
+									</div>
+								</div>
+							</div>
+						{% endfor %}
+						</div>
+						</div>
+					</div>
+				{% endif %}
+				{% if events %}
+					<div class="col-md-6 event-panel">
+						<div class="p-5">
+						<div class="p-1">
+							<div class="row no-gutters">
+								<div class="col-lg-12">
+									<b><h3>Оголошення</h3></b>
+								</div>
+								{% for post in events %}
+									<div class="col-lg-12 event-preview">
+										<span class="event-text"><p>{{ post.date_posted|date:"d F Y  G:i" }}</p></span>
+										{{ post.title }}
+										<span class="event-text"><p>{{ post.content|safe|truncatewords_html:"23" }}</p></span>
+										<!-- <div class="short-post-preview event-text">
+											{# post.content|safe #}
+										</div> -->
+										<a href="{% url 'event-detail' post.id %}" >
+											<button class="btn rounded-0 event-more-btn" >Детальніше</button>
+										</a>
+										<br>
+										<br>
+									</div>
+								{% endfor %}
+							</div>
+						</div>
+						</div>
+					</div>
+				{% endif %}
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	</div>
+
+
+
+			<!-- <b><h1>Events</h1></b> -->
+			<!-- {% for post in events %}
+				<div class="col">
+					<a href="{% url 'event-detail' post.id %}"><h4>{{ post.title }}</h4></a>
+					<p>On {{ post.date_posted|date:"d F Y  G:i" }}</p>
+					<p>{{ post.content|safe|truncatewords:"25" }}</p>
+				</div>
+			{% endfor %} -->
+	
+
+	
+	<div class="container-fluid ">
+	<div class="row row-news justify-content-center">
+		<div class="col-md-12">
+			<h2 align="center" class="section-title">Новини</h2><br>
+		</div>
+		<div class="col-md-11">
+			{% for post in news %}
+				<div class="  p-0 mb-3 bg-white news-preview">
+					<a href="{% url 'news-detail' post.id %}">
+					<div class="row no-gutters">
+						<div class="col-md-5">
+							<img src="{{ post.image.url }}" width=100%><br>
+						</div>
+						<div class="col-md-7">
+							<span class="news-preview-date float-right">{{ post.date_posted|date:"d.m.Y" }}</span>
+							<div class="pt-4 pr-4 pl-4 ">
+								<!-- <hr class="thick-yellow" align="left"> -->
+								<h4><span class="preview-link-highlight">{{ post.title }}</span></h4>	
+								<span class="mb-0">{{ post.content|safe|truncatewords_html:"40" }}</span>
+								<!-- <div class=" short-post-preview mb-0">
+									{# post.content|safe #}
+								</div> -->
+							</div>
+						</div>
+					</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+
+	</div>
+	</div>
+	
+
+{% endblock content %}

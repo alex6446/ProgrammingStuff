@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% block content %}
+	<br>
+	<img src="{{ object.image.url }}" width="100%">
+	<p><span class="news-preview-date float-right">{{ object.date_posted|date:"d.m.Y" }}</span></p>
+	<br>
+	<h2>{{ object.title }}</h2>
+	<p>{{ object.content|safe }}</p>
+	{% if object.news_files.all %}
+		<hr class="hr-yellow-download" align="left" >
+		{% for link in object.news_files.all %}
+			<a href="{{ link.file.url }}" class="link-icon link-icon-text">{{ link.name }}</a> <br>
+		{% endfor %}
+	{% endif %}
+
+
+{% endblock content %}

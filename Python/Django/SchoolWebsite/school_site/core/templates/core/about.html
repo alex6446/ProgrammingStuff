@@ -1,0 +1,111 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% load custom_tags %}
+
+	<div class="row justify-content-center">
+		<div class="col-md-11">
+			{% for welcome in about_welcome %}
+				<div class="row mb-0">
+					<div class="col-md-12">
+						<h2 class="section-title" align="center">{{ welcome.title }}</h2>
+					</div>
+					{% if welcome.image %}
+						<div class="col-md-6 p-1 pr-3 pt-4 welcome-image-fix">							
+							<img src="{{ welcome.image.url }}" width="100%">
+						</div>
+						<div class="col-md-6 p-1 about-welcome-text">
+							<p>{{ welcome.content|safe }}</p>
+							{% if welcome.about_files.all %}
+								<hr class="hr-yellow-download" align="left">
+								{% for link in welcome.about_files.all %}
+									<a href="{{ link.file.url }}" class="link-icon link-icon-text">{{ link.name }}</a> <br>
+								{% endfor %}
+							{% endif %}
+						</div>
+					{% else %}
+						<div class="col-md-12 p-1 about-welcome-text">
+							<p>{{ welcome.content|safe }}</p>
+							{% if welcome.about_files.all %}
+								<hr class="hr-yellow-download" align="left">
+								{% for link in welcome.about_files.all %}
+									<a href="{{ link.file.url }}" class="link-icon link-icon-text">{{ link.name }}</a> <br>
+								{% endfor %}
+							{% endif %}
+						</div>
+					{% endif %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-md-11">
+		{% for info in about_info %}
+			<div class="row mt-0 mb-0">
+				<div class="col-md-12">
+					<h2 class="section-title" id="{{ info.title|conv_link }}" align="center" >{{ info.title }}</h2>
+				</div>
+				<div class="col-md-12 p-1 pt-3">
+					{% if info.image %}
+						<img src="{{ info.image.url }}" width="100%" class="pb-4">
+					{% endif %}
+					<p>{{ info.content|safe }}</p>
+					{% if info.about_files.all %}
+							<hr class="hr-yellow-download" align="left" >
+							{% for link in info.about_files.all %}
+								<a href="{{ link.file.url }}" class="link-icon link-icon-text">{{ link.name }}</a> <br>
+							{% endfor %}
+						{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+
+	<div class="row justify-content-center">
+		<div class="col-md-12">
+			<h2 class="section-title" id="nashi-vchyteli" align="center">Наші вчителі</h2>
+		</div>
+		<div class="col-md-11">
+			<div class="row ">
+				<div class="col-md-4 p-2">
+					<a href="{% url 'core-about-teachers-management' %}" class="about-teacher-item">
+						<div class="about-teacher-block" style="">
+							<span class="about-teacher-scuare"></span>
+							<span class="about-teacher-title">Адміністрація</span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 p-2">
+					<a href="{% url 'core-about-teachers-primary' %}" class="about-teacher-item">
+						<div class="about-teacher-block">
+							<span class="about-teacher-scuare"></span>
+							<span class="about-teacher-title">Початкова школа</span>
+						</div>
+					</a>
+				</div>
+				<div class="col-md-4 p-2">
+					<a href="{% url 'core-about-teachers-secondary' %}" class="about-teacher-item">
+						<div class="about-teacher-block">
+							<span class="about-teacher-scuare"></span>
+							<span class="about-teacher-title">Cередня та старша школа</span>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<br>
+
+	<!-- 	<div class="col-md-3">
+				<div class="card">
+					<img class="card-img-top rounded" src="{{ folder.images.first.image.url }}">
+					<div class="card-body">
+						<span class="card-title">{{ folder.title }}</span>
+					</div>
+				</div>
+			</div> -->
+
+{% endblock content %}

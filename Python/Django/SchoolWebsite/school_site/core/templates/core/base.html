@@ -1,0 +1,282 @@
+{% load static %}
+{% load custom_tags %}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- TinyMCE 
+    <script src="{% static 'core/js/tinymce/tinymce.min.js' %}"></script>
+  	<script type="text/javascript" src="{% static 'core/js/tinymce/custom.js' %}"></script>
+  	-->
+
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'core/main.css' %}"> -->
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/icons.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
+
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="shortcut icon" href="">
+
+	{% if title %}
+		<title>{{ title }}</title>
+	{% else %}
+		<title>No title</title>
+	{% endif %}
+</head>
+
+{% if changebg %}
+	<body style="background-color: #ececec;">
+{% else %}
+	<body style="background-color: #ffffff;">
+{% endif %}
+
+<wrapper class="d-flex flex-column">	
+
+
+
+	<!-- <nav class="row m-0">
+		<div class=" col-lg-2 p-2 bg-white navbar navbar-expand-lg navbar navbar-light brand-style justify-content-lg-center ">
+		 
+
+			  	<a class="navbar-brand text-center brand-style" href="{% url 'core-home' %}"><b>ЗОШ №2</b> <br> <span style="font-size: 11pt;">Чорноморськ</span></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		    		<span class="navbar-toggler-icon"></span>
+				</button>
+
+	  	</div> -->
+		<div class="navbar navbar-expand-md navbar navbar-dark navbar-bg">
+			<a class="navbar-brand  brand-style" href="{% url 'core-home' %}">
+				<img src="{% static 'core/school_logo.svg' %}" class="school-logo">
+				<div class="logo-text">
+					<b><span style="font-size: 16pt;">ЗОШ №2</span></b> <br> 
+					<span style="font-size: 10pt;">Чорноморськ</span>
+				</div>
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    		<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end " id="navbarNav">
+				<hr>
+		    	<ul class="navbar-nav text-left" >
+		      		<li class="nav-item">
+		        		<a class="nav-link" href="{% url 'core-home' %}">Головна  <span class="sr-only"></span></a>
+		      		</li>
+		      		<li class="dropdown" style="display: inline-flex !important; flex-wrap: wrap;">
+		        		<a class="nav-link" href="{% url 'core-about' %}" style="flex-basis: 30%;">Школа</a>
+		        		<a class="nav-link float-right dropdown-icon-fix" data-toggle="dropdown" role="button"  aria-haspopup="false" aria-expanded="false" style="flex-basis: 70%;"> <i class="fas fa-chevron-down dropdown-responsive-icon"></i></a>
+		        		<ul class="dropdown-menu shadow rounded" style="flex-basis: 100%;">
+				      		{% for object in about_anchors %}
+				      		<li class="nav-item">
+				        		<a href="{% url 'core-about' %}#{{ object.title|conv_link }}">{{ object.title }}</a>
+				      		</li>
+				      		{% endfor %}
+				      		<li class="nav-item">
+				        		<a href="{% url 'core-about' %}#nashi-vchyteli">Вчителі</a>
+				      		</li>
+		        			<li class="nav-item">
+				        		<a href="{% url 'core-achievements' %}">Досягнення</a>
+				      		</li>
+		        			<li class="nav-item">
+				        		<a href="{% url 'core-gallery' %}">Галерея</a>
+				      		</li>
+		        		</ul>
+		      		</li>
+		      		<li class="dropdown" style="display: inline-flex !important; flex-wrap: wrap;">
+		        		<a class="nav-link" href="{% url 'core-students' %}" style="flex-basis: 30%;">Учням</a>
+		        		<a class="nav-link float-right dropdown-icon-fix" data-toggle="dropdown" role="button"  aria-haspopup="false" aria-expanded="false" style="flex-basis: 70%;"> <i class="fas fa-chevron-down dropdown-responsive-icon"></i></a>
+		        		<ul class="dropdown-menu shadow rounded" style="flex-basis: 100%;">
+		        			<li class="nav-item">
+				        		<a class="" href="{% url 'core-schedule' %}">Розклад</a>
+				      		</li>
+				     		{% for object in student_anchors %}
+				      		<li class="nav-item">
+				        		<a href="{% url 'core-students' %}#{{ object.title|conv_link }}">{{ object.title }}</a>
+				      		</li>
+				      		{% endfor %}
+		        		</ul>
+		      		</li>
+			      	<!-- <li class="dropdown">
+			        	<a class="nav-link" data-toggle="dropdown" role="button"  aria-haspopup="false" aria-expanded="false" href="{% url 'core-students' %}">Учням</a>
+			      		<ul class="dropdown-menu shadow">
+			      			<li class="nav-item">
+				        		<a class="" href="{% url 'core-schedule' %}">Розклад</a>
+				      		</li>
+				      		<li class="nav-item">
+				        		<a class="" href="{% url 'core-schedule' %}">Пілготовка до ДПА</a>
+				      		</li>
+				      		<li class="nav-item">
+				        		<a class="" href="{% url 'core-gallery' %}">Образотворчі завдання у нашій школі</a>
+				      		</li>
+				      		<li class="nav-item">
+				        		<a class="" href="{% url 'core-schedule' %}">Пілготовка до ЗНО</a>
+				      		</li>
+			      		</ul>
+			      	</li> -->
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="{% url 'core-news' %}">Новини</a>
+			      	</li>
+			      	<li class="nav-item">
+			        	<a class="nav-link" href="{% url 'core-contacts' %}">Контакти</a>
+			      	</li>
+			    </ul>
+		  	</div>
+		</div>
+	</nav>
+
+	{% if background_home %}
+		<div class="background-image-home">
+			<img src="{{ background_home.url }}">
+		</div>
+	{% elif background_about %}
+		<div class="background-image">
+			<img src="{{ background_about.url }}">
+		</div>
+	{% elif background_gallery %}
+		<div class="background-image">
+			<img src="{{ background_gallery.url }}">
+		</div>
+	{% elif background_schedule %}
+		<div class="background-image">
+			<img src="{{ background_schedule.url }}">
+		</div>
+	{% elif background_students %}
+		<div class="background-image">
+			<img src="{{ background_students.url }}">
+		</div>
+	{% elif background_news %}
+		<div class="background-image">
+			<img src="{{ background_news.url }}">
+		</div>
+	{% elif background_achievements %}
+		<div class="background-image">
+			<img src="{{ background_achievements.url }}">
+		</div>
+	{% elif background_contacts %}
+		<div id="map"></div>
+	    <script>
+	      function initMap() {
+	      	var location = {lat: 46.302750, lng: 30.657820};
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          zoom: 17,
+	          center: location
+	        });
+	        var marker = new google.maps.Marker({
+	        	position: location,
+	        	map: map
+	        })
+	      }
+	    </script>
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwRFDROO70Wg4OJe9XmzSbM6pht-jOzBk&callback=initMap" async defer></script>
+	{% endif %}
+
+
+
+
+
+<!--
+	<nav>
+		<div class="logo">
+			<h1>ЗОШ №2</h1>
+			<h2>Chornomorsk</h2>
+		</div>
+		<ul class="menu">
+			<li>
+				<a href="{% url 'core-home' %}" title="Main Page">Main</a>
+			</li>
+			<li>
+				<a href="{% url 'core-about' %}" title="About Page">About</a>
+			</li>
+			<li>
+				<a href="{% url 'core-schedule' %}" title="Schedule Page">Schedule</a>
+			</li>
+			<li>
+				<a href="{% url 'core-students' %}" title="Students Page">Students</a>
+			</li>
+			<li>
+				<a href="{% url 'core-news' %}" title="News Page">News</a>
+			</li>
+			<li>
+				<a href="{% url 'core-contacts' %}" title="Contacts Page">Contacts</a>
+			</li>
+			<li>
+				<a href="/admin" title="Admin Page">Admin</a>
+			</li>
+		</ul>
+	</nav>-->
+	
+	<div class="container flex-fill" style="position: relative;">
+		{% if messages %}
+			<br>
+			{% for message in messages %}
+				{% if message.tags == 'error' %}
+					<div class="alert alert-danger">
+						{{ message }}
+					</div>
+				{% else %}
+					<div class="alert alert-{{ message.tags }}">
+						{{ message }}
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% block content %}{% endblock %}
+	</div>
+
+	<footer>
+		<div class="row justify-content-center">
+		<div class="col-md-11">
+			<div class="container-fluid padding">
+			<div class="row text-center">
+				<div class="col-md-4 social">
+					<p class="footer-title">
+						<a href="#"><i class="fab fa-twitter"></i></a>
+						<a href="#"><i class="fab fa-facebook"></i></a>
+						<a href="#"><i  class="fab fa-instagram"></i></a>
+					</p>
+					<p class="footer-content">&copy; 2019 Загальноосвітня школа I-III ступенів №2 <br> Сайт створив Меденицький Олексій</p>
+				</div  class="col-md-4">
+				<div class="col-md-4 social">
+					<p class="footer-title">Ми на зв'язку</p>
+					<p class="footer-content">Телефон: +7 (495) 000-00-00 <br> Email: info@mysite.ua</p>
+				</div>
+				<div class="col-md-4 social">
+					<p class="footer-title">Адреса</p>
+					<p class="footer-content">Проспект Миру, 1а, Чорноморськ, <br> 68001, Україна</p>
+				</div>
+			</div>
+			</div>
+		</div>
+		<!-- <div class="col-md-12 social">
+			<hr class="light">
+			<p class="footer-content text-center">Site development - Alex6446</p>
+		</div> -->
+		</div>
+	</footer>
+
+
+
+
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{% static 'core/image.js' %}"></script>
+    <!-- <script type="text/javascript" src="{% static 'core/dropdown-fix.js' %}"></script> -->
+    <script type="text/javascript" src="{% static 'core/scripts-jquery.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+</wrapper>
+</body>
+</html>

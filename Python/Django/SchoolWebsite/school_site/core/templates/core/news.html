@@ -1,0 +1,113 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+	{% if not news.has_previous and events %}
+		<div class="container-fluid ">
+		<div class="row  justify-content-center">
+			<div class="col-md-12">
+				<h2 align="center" class="section-title">Оголошення</h2><br>
+			</div>
+			<div class="col-md-11 event-all ">
+				<div class=" row  p-3">
+				{% for post in events %}
+				<a href="{% url 'event-detail' post.id %}">
+					<div class="col-md-12">
+							<span class="event-all-date">{{ post.date_posted|date:"d F Y  G:i" }}</span>
+							<h4 style="margin-top: 8px; margin-bottom: 3px;"><span class="preview-link-highlight">{{ post.title }}</span></h4>
+							{{ post.content|safe|truncatewords_html:"35" }}
+							<!-- <div class="short-post-preview">
+								{# post.content|safe #}
+							</div> -->
+						{% if not post == events.last %}
+							<hr class="light">
+						{% endif %}
+					</div>
+				</a>
+				{% endfor %}
+				</div>
+			</div>
+			</div>
+		</div>
+		<br>
+	{% endif %}
+
+	<div class="container-fluid ">
+	<div class="row  justify-content-center">
+		<div class="col-md-12">
+			<h2 align="center" class="section-title">Новини</h2><br>
+		</div>
+		<div class="col-md-11">
+			{% for post in news %}
+				<div class=" p-0 mb-3 bg-white news-preview">
+					<a href="{% url 'news-detail' post.id %}">
+					<div class="row no-gutters">
+						<div class="col-md-5">
+							<img src="{{ post.image.url }}" width=100%><br>
+						</div>
+						<div class="col-md-7">
+							<span class="news-preview-date float-right" >{{ post.date_posted|date:"d.m.Y" }}</span>
+							<div class="pt-4 pr-4 pl-4 news-content">
+								<h4><span class="preview-link-highlight">{{ post.title }}</span></h4>	
+								<span class="mb-0" style="color: #2F2E2E;">{{ post.content|safe|truncatewords_html:"40" }}</span>
+								
+								<!-- <div class="short-post-preview mb-0" style="color: #2F2E2E;">	
+									{# post.content|safe #}
+								</div> -->
+							</div>
+						</div>
+					</div>
+					</a>
+				</div>
+			{% endfor %}
+		</div>
+
+	</div>
+	</div>
+	<!--
+	{% if is_paginated %}
+		<p>HELLLOOOOOOOOOOOO</p>
+		{% if page_obj.has_previous %}
+			<a href="?page=1">First</a>
+			<a href="?page={{ page_obj.has_previous_page_number }}">Previous</a>
+		{% endif %}
+
+		{% for num in page_obj.paginator.page_range %}
+			{% if page_obj.number == num %}
+				<a href="?page={{ num }}">{{ num }}</a>
+			{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'+3' %}
+				<a href="?page={{ num }}">{{ num }}</a>
+			{% endif %}
+		{% endfor %}
+
+		{% if page_obj.has_next %}
+			<a href="?page={{ page_obj.next_page_number }}">Next</a>
+			<a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+		{% endif %}
+
+	{% endif %}
+	<br>
+	<br>
+-->
+	<!-- <br> -->
+	<br>
+	<div align="center" class="btn-page">
+		{% if news.has_previous %}
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page=1"><i class="fas fa-angle-double-left"></i></a>
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ news.previous_page_number }}"><i class="fas fa-angle-left"></i></a>
+		{% endif %}
+
+		{% for num in news.paginator.page_range %}
+			{% if news.number == num %}
+				<a class="btn btn-info mb-4 rounded-0" href="?page={{ num }}"><b>{{ num }}</b></a>
+			{% elif num > news.number|add:'-3' and num < news.number|add:'+3' %}
+				<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ num }}"><b>{{ num }}</b></a>
+			{% endif %}
+		{% endfor %}
+
+		{% if news.has_next %}
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ news.next_page_number }}"><i class="fas fa-angle-right"></i></a>
+			<a class="btn btn-outline-info mb-4 rounded-0" href="?page={{ news.paginator.num_pages }}"><i class="fas fa-angle-double-right"></i></a>
+		{% endif %}
+	</div>
+
+{% endblock content %}

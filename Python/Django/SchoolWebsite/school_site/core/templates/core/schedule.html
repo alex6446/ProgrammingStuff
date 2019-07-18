@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+{% block content %}
+	{% if time_extra or lessons_extra %}
+	<h2 align="center" class="section-title">ТИМЧАСОВИЙ РОЗКЛАД</h2>
+	<hr class="hr-yellow" style="width: 50%; background-color: red;">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<div class="row ">
+			{% for schedule in time_extra %}
+					<div class="col-md-6 p-3">
+						<h4 align="center" class="pt-0 mt-0">{{ schedule.title }}</h4>
+						<div class="schedule-time-table table-striped table-bordered" align="center">
+							{{ schedule.table|safe }}
+						</div>
+					</div>
+			{% endfor %}	
+			</div>
+		</div>
+	</div>
+	<br>
+	<div class="row justify-content-center">	
+	{% for schedule in lessons_extra %}
+			
+				<a href="{{ schedule.table.url }}" data-toggle="lightbox" class="col-md-6 p-2">
+					<img src="{{ schedule.table.url }}" class="img-fluid rounded">
+				</a>
+			
+			<br>
+	{% endfor %}
+	</div>
+	{% endif %}
+
+	<h2 align="center" class="section-title">РОЗКЛАД ДЗВІНКІВ</h2>
+	<hr class="hr-yellow" style="width: 50%;">
+	<div class="row justify-content-center">
+		<div class="col-md-8">
+			<h2 class="section-title" align="center" style="margin-top: 14px;">Літній час</h2>
+			<div class="row ">
+			{% for schedule in time_general_summer %}
+					<div class="col-md-6 p-3">
+						<h4 align="center" class="pt-0 mt-0">{{ schedule.title }}</h3>
+						<div class="schedule-time-table table-striped table-bordered" align="center">
+							{{ schedule.table|safe }}
+						</div>
+					</div>
+			{% endfor %}	
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h2 class="section-title" align="center" style="margin-top: 14px;">Зимовий час</h2>
+			<div class="row ">
+			{% for schedule in time_general_winter %}
+					<div class="col-md-6 p-3">
+						<h4 align="center" class="pt-0 mt-0">{{ schedule.title }}</h3>
+						<div class="schedule-time-table table-striped table-bordered" align="center">
+							{{ schedule.table|safe }}
+						</div>
+					</div>
+			{% endfor %}	
+			</div>
+		</div>
+	</div>
+
+	<h2 align="center" class="section-title">РОЗКЛАД УРОКІВ</h2>
+	<hr class="hr-yellow" style="width: 50%;">
+	<div class="row justify-content-center">
+	{% for schedule in lessons_general %}
+			<!--<div class="table-bordered">-->
+			
+				<a href="{{ schedule.table.url }}" data-toggle="lightbox" class="col-md-6 p-2">
+					<img src="{{ schedule.table.url }}" class="img-fluid rounded">
+				</a>
+			
+				
+			<!--</div>-->
+			<br>
+	{% endfor %}
+	</div>
+
+	
+	
+
+{% endblock content %}

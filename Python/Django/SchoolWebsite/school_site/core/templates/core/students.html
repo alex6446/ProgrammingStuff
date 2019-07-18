@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% block content %}
+{% load custom_tags %}
+	<div class="row justify-content-center">
+		<div class="col-md-11">
+		{% for post in student_articles %}
+			<div class="row mt-0 mb-0">
+				<div class="col-md-12">
+					<h2 class="section-title" id="{{ post.title|conv_link }}" align="center" >{{ post.title }}</h2>
+				</div>
+				<div class="col-md-12 p-1 pt-3 ">
+					{% if post.image %}
+						<img src="{{ post.image.url }}" width="100%" class="pb-4">
+					{% endif %}
+					{{ post.content|safe }}
+					{% if post.student_files.all %}
+							<hr class="hr-yellow-download" align="left" >
+							{% for link in post.student_files.all %}
+								<a href="{{ link.file.url }}" class="link-icon link-icon-text">{{ link.name }}</a> <br>
+							{% endfor %}
+						{% endif %}
+				</div>
+			</div>
+		{% endfor %}
+		</div>
+	</div>
+
+{% endblock content %}

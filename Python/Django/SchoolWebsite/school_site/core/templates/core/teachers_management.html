@@ -1,0 +1,18 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+	<h2 class="section-title" align="center">Адміністрація школи</h2>
+	<br>
+	{% for post in teachers %}
+		<p>{{ post.content|safe }}</p>	
+	{% endfor %}
+	
+	{% if teachers.teacher_files.all %}
+		<hr class="hr-yellow-download" align="left" >
+		{% for link in teachers.teacher_files.all %}
+			<a href="{{ link.file.url }}" class="link-icon link-icon-text">{{ link.name }}</a> <br>
+		{% endfor %}
+	{% endif %}
+	<br>
+
+{% endblock content %}

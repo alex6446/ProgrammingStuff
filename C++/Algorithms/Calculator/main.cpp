@@ -6,7 +6,7 @@ using namespace std;
 ////////// FUNCTIONS ////////////////////////////////////////////
 
 double 			Solve (string problem);
-vector<string> 	Normalize (string problem);
+vector<string>	Normalize (string problem);
 double 			Count (double a, double b, char operation);
 int 			Priority (string str);
 int 			Priority (char operation);
@@ -18,10 +18,7 @@ bool 			Is_number (char digit);
 
 int main () {
 	setlocale(LC_ALL, "Russian");
-	cout << "\t\t\t ********* Калькулятор ********* \n\n";
-
-	cout << " # Все вводимые числа должны быть положительными, без знака - " << endl
-		 << " # Пробелы между символами не влияют на результат " << endl << endl; 
+	cout << "\t\t\t ********* Калькулятор ********* \n\n" << endl; 
 
 	string problem;
 	while (true) {
@@ -98,7 +95,7 @@ vector<string> Normalize (string problem) {
 	string buffer;
 	bool InNum;
 	
-	if (Is_number(problem[0]))
+	if (Is_number(problem[0]) || problem[0] == '-')
 		InNum = true;
 	else
 		InNum = false;
@@ -113,6 +110,8 @@ vector<string> Normalize (string problem) {
 				InNum = true;
 			else if (!Is_number(digit) && InNum)
 				InNum = false;
+			else if (digit == '-')
+				InNum = true;
 		}
 		buffer.push_back(digit);
 	}
@@ -176,8 +175,10 @@ bool Is_operation (string str) {
 bool Is_number (string str) {
 	if (str.empty())
 		return false;
+	if (str[0] == '-' && str.size() == 1)
+		return false;
 	for (char digit : str)
-		if (!Is_number(digit))
+		if (!Is_number(digit) && digit != '-')
 			return false;
 	return true;
 }
@@ -199,4 +200,5 @@ bool Is_number (char digit) {
 	}
 }
 
+//1+2*(3+4/2-(1+2))*2+1
 //(12-(35/(12-7)+7)+28)/13

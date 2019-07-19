@@ -3,30 +3,140 @@
 
 using namespace std;
 
-////////// FUNCTIONS ////////////////////////////////////////////
+////////// IS NUMBER ////////////////////////////////////////////
 
-double 			Solve (string problem);
-vector<string>	Normalize (string problem);
-double 			Count (double a, double b, char operation);
-int 			Priority (string str);
-int 			Priority (char operation);
-bool 			Is_operation (string str);
-bool 			Is_number (string str);
-bool 			Is_number (char digit);
-
-////////// MAIN /////////////////////////////////////////////////
-
-int main () {
-	setlocale(LC_ALL, "Russian");
-	cout << "\t\t\t ********* Калькулятор ********* \n\n" << endl; 
-
-	string problem;
-	while (true) {
-		cout << " Введите пример: ";
-		getline (cin, problem);
-		cout << " Ответ: " << Solve(problem) << endl << endl;
+bool Is_number (char digit) {
+	switch (digit) {
+		case '0':
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		case '.': return true;
+		default : return false;
 	}
-	return 0;
+}
+
+bool Is_number (string str) {
+	if (str.empty())
+		return false;
+	if (str[0] == '-' && str.size() == 1)
+		return false;
+	for (char digit : str)
+		if (!Is_number(digit) && digit != '-')
+			return false;
+	return true;
+}
+
+////////// IS OPERATION /////////////////////////////////////////
+
+bool Is_operation (string str) {
+	if (str.size() > 1)
+		return false;
+	char operation = str[0];
+	switch (operation) {
+		case '+':
+		case '-':  
+		case '*':
+		case '/': return true;
+		default : return false;
+	}
+}
+
+////////// PRIORITY /////////////////////////////////////////////
+
+int Priority (char operation) {
+	switch (operation) {
+		case '+':
+		case '-': return 1; 
+		case '*':
+		case '/': return 2;
+		default : return 0;
+	}
+}
+
+int Priority (string str) {
+	char operation = str[0];
+	switch (operation) {
+		case '+':
+		case '-': return 1; 
+		case '*':
+		case '/': return 2;
+		default : return 0;
+	}
+}
+
+////////// COUNT ////////////////////////////////////////////////
+
+double Count (double a, double b, char operation) {
+	switch (operation) {
+		case '+': return a + b;
+		case '-': return a - b; 
+		case '*': return a * b;
+		case '/': return a / b;
+		default : return 0;
+	}
+}
+
+////////// NORMALIZE ////////////////////////////////////////////
+
+vector<string> Normalize (string problem) {
+
+	vector<string> normalized;
+	string buffer;
+	bool InNum;
+	int brackets = 0;
+	
+	if (Is_number(problem[0]) || problem[0] == '-')
+		InNum = true;
+	else
+		InNum = false;
+
+	for (char digit : problem) {
+		if (digit == ' ')
+			continue;
+		if (!(Is_number(digit) && InNum) && !buffer.empty()) {
+			if (buffer == "(") {
+				brackets++;
+				if (!normalized.empty())
+					if (Is_number(normalized.back()))
+						normalized.push_back("*");
+			} else if (buffer == ")")
+				brackets--;
+			normalized.push_back(buffer);
+			buffer.clear();
+			if (Is_number(digit) && !InNum) {
+				InNum = true;
+				if (!normalized.empty())
+					if (normalized.back() == ")")
+						normalized.push_back("*");
+			}
+			else if (!Is_number(digit) && InNum)
+				InNum = false;
+			else if (digit == '-' && normalized.back() != ")")
+				InNum = true;
+		}
+		buffer.push_back(digit);
+	}
+	if (buffer == "(")
+		brackets++;
+	else if (buffer == ")")
+		brackets--;
+	normalized.push_back(buffer);
+
+	while (!Is_number(normalized.back()) && normalized.back() != ")")
+		normalized.pop_back();
+	while (brackets > 0) {
+		normalized.push_back(")");
+		brackets--;
+	}
+
+	return normalized;
 }
 
 ////////// SOLVE ////////////////////////////////////////////////
@@ -87,118 +197,22 @@ double Solve (string problem) {
 	return numbers.back();
 }
 
-////////// NORMALIZE ////////////////////////////////////////////
+int main () {
+	setlocale(LC_ALL, "Russian");
+	cout << "\t\t\t ********* Калькулятор ********* \n\n" << endl; 
 
-vector<string> Normalize (string problem) {
-
-	vector<string> normalized;
-	string buffer;
-	bool InNum;
-	
-	if (Is_number(problem[0]) || problem[0] == '-')
-		InNum = true;
-	else
-		InNum = false;
-
-	for (char digit : problem) {
-		if (digit == ' ')
-			continue;
-		if (!(Is_number(digit) && InNum) && !buffer.empty()) {
-			normalized.push_back(buffer);
-			buffer.clear();
-			if (Is_number(digit) && !InNum)
-				InNum = true;
-			else if (!Is_number(digit) && InNum)
-				InNum = false;
-			else if (digit == '-')
-				InNum = true;
-		}
-		buffer.push_back(digit);
+	string problem;
+	while (true) {
+		cout  << endl << " Введите пример: ";
+		getline (cin, problem);
+		cout << " Ответ: " << Solve(problem) << endl << endl;
+		/*for (string i : Normalize(problem))
+			cout << i << " ";*/
 	}
-	normalized.push_back(buffer);
-
-	return normalized;
+	return 0;
 }
 
-////////// COUNT ////////////////////////////////////////////////
-
-double Count (double a, double b, char operation) {
-	switch (operation) {
-		case '+': return a + b;
-		case '-': return a - b; 
-		case '*': return a * b;
-		case '/': return a / b;
-		default : return 0;
-	}
-}
-
-////////// PRIORITY /////////////////////////////////////////////
-
-int Priority (string str) {
-	char operation = str[0];
-	switch (operation) {
-		case '+':
-		case '-': return 1; 
-		case '*':
-		case '/': return 2;
-		default : return 0;
-	}
-}
-
-int Priority (char operation) {
-	switch (operation) {
-		case '+':
-		case '-': return 1; 
-		case '*':
-		case '/': return 2;
-		default : return 0;
-	}
-}
-
-////////// IS OPERATION /////////////////////////////////////////
-
-bool Is_operation (string str) {
-	if (str.size() > 1)
-		return false;
-	char operation = str[0];
-	switch (operation) {
-		case '+':
-		case '-':  
-		case '*':
-		case '/': return true;
-		default : return false;
-	}
-}
-
-////////// IS NUMBER ////////////////////////////////////////////
-
-bool Is_number (string str) {
-	if (str.empty())
-		return false;
-	if (str[0] == '-' && str.size() == 1)
-		return false;
-	for (char digit : str)
-		if (!Is_number(digit) && digit != '-')
-			return false;
-	return true;
-}
-
-bool Is_number (char digit) {
-	switch (digit) {
-		case '0':
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
-		case '.': return true;
-		default : return false;
-	}
-}
-
-//1+2*(3+4/2-(1+2))*2+1
+//1+2(3+4/2-(1+2))2+1
 //(12-(35/(12-7)+7)+28)/13
+//2(3(8-5)0.5*0.5
+//2(3(8-5)-0.5*-0.5

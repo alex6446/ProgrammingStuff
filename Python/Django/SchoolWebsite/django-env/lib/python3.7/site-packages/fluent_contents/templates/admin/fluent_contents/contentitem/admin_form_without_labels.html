@@ -1,0 +1,6 @@
+{% extends "admin/fluent_contents/contentitem/admin_form.html" %}
+{% block fieldsets %}
+  {% for fieldset in inline_admin_form %}
+    {% include "admin/fluent_contents/fieldset_without_labels.html" %}
+  {% endfor %}
+{% endblock %}

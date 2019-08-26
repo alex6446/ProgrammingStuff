@@ -1,0 +1,2 @@
+g++ -c main.cpp -o ~/Документы/C++/SFML/ReflectionAdvanced/main.o && g++ ~/Документы/C++/SFML/ReflectionAdvanced/main.o -o ~/Документы/C++/SFML/ReflectionAdvanced/main -lsfml-graphics -lsfml-window -lsfml-system && gnome-terminal -- bash -c "~/Документы/C++/SFML/ReflectionAdvanced/main;echo;echo;  echo Press ENTER to continue; read line;exit; exec bash"
+

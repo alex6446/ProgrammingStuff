@@ -27,7 +27,7 @@ public:
 		fontSize = 24;
 	}
 	SFMLConsole (int width, int height) {
-		console.create(VideoMode(width, width), "SFML Console");
+		console.create(VideoMode(width, height), "SFML Console");
 		font.loadFromFile("Roboto-Regular.ttf");
 		fontSize = 24;
 	}

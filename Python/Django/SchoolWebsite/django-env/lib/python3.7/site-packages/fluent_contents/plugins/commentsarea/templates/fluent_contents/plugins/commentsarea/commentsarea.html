@@ -1,0 +1,11 @@
+{% load commentsarea_tags %}
+
+{% with page=instance.parent %}
+  {% render_comment_list for page %}
+
+  {% if instance.allow_new %}
+    {% render_comment_form for page %}
+  {% else %}
+    {% include "fluent_contents/plugins/commentsarea/comments_closed.html" %}
+  {% endif %}
+{% endwith %}

@@ -1,0 +1,42 @@
+{% load i18n %}
+  <div id="{{ inline_admin_formset.formset.prefix }}-group" class="inline-group inline-contentitem-group inline-{{ inline_admin_formset.formset.type_name }}-group" data-inline-model="{{ inline_admin_formset.formset.type_name }}">
+    {{ inline_admin_formset.formset.management_form }}
+    {{ inline_admin_formset.formset.non_form_errors }}
+
+    {% if inline_admin_formset.opts.cp_admin_init_template %}
+      {% include inline_admin_formset.opts.cp_admin_init_template %}
+    {% endif %}
+
+    {# looping in `inline_admin_formset.formset.forms` excludes empty form #}
+    {# looping in `inline_admin_formset` includes the empty placeholder as last item #}
+    {% for inline_admin_form in inline_admin_formset %}
+      <div class="inline-related inline-{{ inline_admin_form.model_admin.type_name }}{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+        <h2 class="cp-formset-item-title cp-clearfix">
+          <span class="title">{{ inline_admin_formset.opts.name }}</span>
+          <span class="cp-item-controls">
+            <span class="cp-item-icons">
+              <a class="cp-item-up" href="#up">u</a>
+              <a class="cp-item-down" href="#down">d</a>
+              <a class="cp-item-move" href="#move">m</a>
+            </span>
+            <span class="cp-item-delete"><a href="#delete">x</a>{% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}{{ inline_admin_form.deletion_field.field }}{% endif %}</span>
+          </span>
+        </h2>
+
+        {% if inline_admin_form.has_auto_field or inline_admin_form.needs_explicit_pk_field %}{{ inline_admin_form.pk_field.field }}{% endif %}
+
+        <div class="cp-formset-item-fields">{# this div is used for the copy-language functionality #}
+          {# render the form fields. Each Content Type can override it. Default is "admin/cp/cmspageitem/admin_form.html". #}
+          {% if inline_admin_form.form.non_field_errors %}
+            <div class="form-row">{{ inline_admin_form.form.non_field_errors }}</div>
+          {% endif %}
+
+          {% block formfields %}
+            {% with inline_admin_form.form as form %}
+              {% include inline_admin_formset.opts.cp_admin_form_template %}
+            {% endwith %}
+          {% endblock %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>

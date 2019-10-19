@@ -20,6 +20,9 @@ from .models import (
 	Background,
 	)
 from .forms import ContactForm
+import sendgrid
+import os
+#from sendgrid.helpers.mail import *
 
 def home(request):
 	news_list = News.objects.all().order_by('-date_posted')
@@ -201,20 +204,28 @@ def contacts(request):
 			# send email
 			sender_name = form.cleaned_data['name']
 			sender_email = form.cleaned_data['email']
-			print(sender_email)
 
 			subject = "Сайт ЗОШ №2"
-			message = "{0}\n{1}\n\n{2}".format(
+			message = "{0} отправил(а) вам сообщение:\n\n{1}".format(
 				sender_name,
-				sender_email, 
 				form.cleaned_data['message'])
-			send_mail(
-				subject, 
-				message, 
-				sender_email, 
-				[settings.EMAIL_HOST_USER], 
-				fail_silently=False,
-				)
+			sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+			data = {
+				"personalizations": [{
+					"to": [{
+						"email": settings.EMAIL_HOST_USER
+						}],
+					"subject": subject
+			    }],
+				"from": {
+					"email": sender_email
+				},
+				"content": [{
+					"type": "text/plain",
+					"value": message
+				}]
+				}
+			response = sg.client.mail.send.post(request_body=data)
 
 			messages.success(request, f'Повідомлення відправлено!')
 			return redirect('core-contacts')

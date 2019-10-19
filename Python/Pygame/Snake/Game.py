@@ -3,7 +3,7 @@ import random
 
 WIDTH = 600
 HEIGHT = 600
-FPS = 5
+FPS = 15
 
 BACKGROUND_COLOR = (20,26,27)
 FRUIT_COLOR = (237,67,55)

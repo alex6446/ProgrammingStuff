@@ -1,0 +1,699 @@
+/*@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700');*/
+/*
+body{
+	font-family: 'Helvetica';
+}*/
+
+@media (max-width: 576px){
+	.container-fluid {
+  		padding-right: 0 !important;
+  		padding-left: 0 !important;
+  		margin: 0 !important;
+  	}
+  	.row {
+		margin: 0px;
+	}
+	.p-5 {
+		padding: 2.5rem !important;
+	}
+}
+
+@media (min-width: 576px){
+	.card-columns {
+    	column-count: 2;
+  	}
+  	.about-img-width-fix {
+  		width: 100%;
+  	}
+  	.row {
+		margin: 15px;
+	}
+  	/*.container-fluid {
+  		padding-right: 0 !important;
+  		padding-left: 0 !important;
+  		margin: 0 !important;
+  	}*/
+  	/*.navbar-bg {
+  		background-color: white;
+  	}
+  	.navbar-dark .navbar-nav .nav-link {
+  		color: black;
+  	}
+  	.navbar-dark .navbar-nav .nav-link:hover {
+  		color: black;
+  	}*/
+  	/*.content-margin {
+		margin-top: 15rem;
+	}*/
+}
+
+@media (max-width: 768px){
+	.welcome-image-fix {
+		padding: 0.25rem !important;
+	}
+	.dropdown-responsive-icon {
+		content: "\f078";
+		display: inline-block;
+	    font: normal normal normal 14px/1 Font Awesome\ 5 Free;
+	    font-weight: 900;
+	    font-size: 100%;
+	    margin-top: 0.5rem;
+	    margin-left: 5px;
+	    float: right;
+	}
+}
+
+@media (min-width: 768px){
+	/*.container {
+		padding: 0;
+		margin: 0;
+		max-width: none;	
+	}*/
+	.dropdown-icon-fix {
+		display: none;
+		visibility: hidden;
+	}
+	.dropdown:hover>.dropdown-menu {
+		display: block;
+	}
+	.card-columns {
+    	column-count: 3;
+  	}
+  	.about-img-width-fix {
+  		width: 100%;
+  	}
+  	.row {
+		margin: 15px;
+	}
+  	/*.content-margin {
+		margin-top: 40rem;
+	}*/
+}
+
+@media (max-width: 992px){
+	.container {
+		max-width: none;	
+	}
+	.home-background-height {
+		height: 300px;
+	}
+	.home-background-height-no-events {
+		height: 375px;
+	}
+	.background-image-home img {
+		display: block !important;
+		height: 375px; /*250px for mobile*/  /*470px for city picture*/
+		object-fit: cover;
+		width: 100%;
+		position: absolute;
+	}
+	.background-image img {
+		display: block !important;
+		height: 250px; /*250px for mobile*/  /*470px for city picture*/
+		object-fit: cover;
+		width: 100%;
+	}
+	#map {
+		height: 250px;
+		width: 100%;
+		max-height: 500px;
+	}
+/*	.row-news {
+		margin: 0 !important;
+	}*/
+}
+
+@media (min-width: 992px){
+	.card-columns {
+    	column-count: 4;
+  	}
+  	.about-img-width-fix {
+  		width: 50%;
+  	}
+  	.row {
+		margin: 15px;
+	}
+	.home-background-height {
+		height: 600px;
+	}
+	.home-background-height-no-events {
+		height: 730px;
+	}
+	.background-image-home img {
+		display: block !important;
+		height: 730px; /*250px for mobile*/  /*470px for city picture*/
+		object-fit: cover;
+		width: 100%;
+		position: absolute;
+	}
+	.background-image img {
+		display: block !important;
+		height: 500px; /*250px for mobile*/  /*470px for city picture*/
+		object-fit: cover;
+		width: 100%;
+	}
+	#map {
+		height: 500px;
+		width: 100%;
+		max-height: 500px;
+	}
+  /*	.content-margin {
+		margin-top: 40rem;
+	}*/
+}
+
+@media (min-width: 1200px) {
+	/*.container-fluid {
+		max-width: 1140px;
+	}*/
+}
+
+[class*="col-"] {
+	padding: 0;
+}
+
+/*.test {
+	height: 100%;
+	min-height: 100%;
+}*/
+
+wrapper {
+	min-height: 100vh;
+}
+
+body {
+	height: 100%;
+	min-height: 100vh;
+	/*background-image: url("zoh_resized2.png");*/
+	/*background-repeat: no-repeat;*/
+	/*background-size: cover;*/
+	/*background-height: 100px;*/
+	/*font-family: 'Poppins', sans-serif;*/
+}
+
+.logo-text span{
+	color: white;
+}
+
+.logo-text {
+	display: inline-block;
+	vertical-align: middle;
+	margin-bottom: 0;
+	margin-top: 6px;
+	margin-left: 5px;
+}
+
+.school-logo {
+	/*width: 30%;*/
+	height: auto;
+	vertical-align: top;
+}
+
+footer {
+	background-color: #343F64;
+	margin-top: 2rem;
+	padding: 1.2rem;
+	margin: none;
+	font-size: 11pt;
+}
+
+.footer-title {
+	color: #FFFFFF;
+}
+
+.footer-content {
+	color: #959CB2;
+}
+
+.footer-title a {
+	color: #FFFFFF;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+.navbar-bg {
+	background-color: #343F64;
+}
+
+.brand-style {
+	/*color: #343F64 !important;*/
+	/*color: #959CB2 !important;*/
+	color: #EEEEEE !important;
+	line-height: .8 !important;
+	/*padding-left: 10px;*/
+	padding-right: 10px;
+}
+
+.navbar button {
+	border: none;
+	outline: none;
+}
+
+a {
+	outline: none;
+	/*text-decoration: none !important;*/
+}
+
+a.link-icon-text {
+	color: black;
+	font-weight: 500;
+	/*font-size: 14pt;*/
+	line-height: 2;
+}
+
+/*.nav-item, .dropdown {
+	padding: 0.5rem;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}*/
+
+.nav-item a {
+	outline: none;
+}
+
+.nav-link{
+	padding: 10px;
+	padding-right: 18px !important;
+	/*margin-right: 10px;*/
+/*	text-transform: uppercase;*/
+	font-size: 14pt;
+	font-weight: 450;
+}
+
+.dropdown-menu {
+	margin: 0;
+	border-radius: 0;
+	border: none;
+	background-color: #ececec;
+	padding-left: 25px;
+	padding-right: 18px;
+	right: auto;
+	min-width: 300px !important;
+	left: -25px;
+	color: #343F64;
+}
+
+.dropdown-menu .nav-item {
+	padding-left: 0.25rem;
+	margin: 0.45rem !important;
+	list-style-type: square;
+}
+
+.dropdown-menu .nav-item a {
+	display: flex; 
+	color: #343F64;
+	/*font-size: 14pt;*/
+	font-weight: 450;
+	text-decoration: none;
+}
+
+.dropdown-menu .nav-item:hover {
+	color: #5668a5;
+}
+
+.dropdown-menu .nav-item a:hover {
+	color: #5668a5;
+}
+
+/*.content-margin {
+	margin-top: 40rem;
+}*/
+
+.section-title {
+	color: #343F64;
+	font-size: 22pt;
+	margin: 14px;
+	margin-top: 40px;
+}
+
+.table {
+	margin-bottom: 0;
+}
+
+.thumbnail {
+	position: relative;
+	padding: 0px;
+	margin-bottom: 20px;
+}
+
+.thumbnail img{
+	width: 100%;
+}
+
+.card a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.card-text span {
+	color: #464646;
+}
+
+.card-body {
+	padding: 0.75rem;
+}
+
+.card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.modal-content {
+	border-radius: 0;
+	border: 0;
+}
+
+.modal-body {
+	padding: 0.5rem;
+}
+
+.modal-footer {
+	font-weight: bold;
+	padding: 0.5rem;
+	padding-top: 0;
+	justify-content: start;
+	border-top: 0;
+}
+
+.no-gutters {
+	padding: 0;
+	margin: 0;
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.event-panel {
+	background-color: #343F64;
+	color: #FFFFFF;
+}
+
+.event-preview {
+	font-size: 11pt !important;
+	margin-top: 1.4rem;
+}
+
+.event-preview p {
+	margin-top: 0.4rem;
+	margin-bottom: 0.4rem;
+}
+
+.event-text {
+	color: #959CB2;
+}
+
+.event-more-btn {
+	background-color: #E9DB89;
+	color: #343F64;
+	width: 45%;
+	font-size: 11pt;
+	margin-top: 0.6rem;
+}
+
+.event-more-btn:hover {
+	background-color: #ece09a;
+}
+
+.event-more-btn:focus, .event-more-btn:active {
+	box-shadow: none !important;
+}
+
+.welcome-panel {
+	color: #343F64;
+}
+
+.welcome-preview {
+	font-size: 11pt;
+}
+
+.grey-link a {
+	color: #69718B;
+	outline: none;
+}
+
+.grey-link a:hover {
+	color: #505669;
+	outline: none;
+}
+
+/*.news-preview{
+	border-right: 2px; 
+	border-color: #69718B;
+	border-right-style: solid;
+}*/
+
+.news-preview a {
+	color: #2F2E2E;
+	text-decoration: none;
+}
+
+.preview-link-highlight:hover {
+	color: #69718B;
+}
+
+.news-preview-date {
+	padding-top: 5px; 
+	padding-bottom: 3px; 
+	padding-left: 7px; 
+	padding-right: 7px; 
+	color: #464646; 
+	background-color: #e1e1e1; 
+	font-size: 10.5pt;
+}
+
+.card {
+	background-color: #ececec; 
+}
+
+.event-all {
+	background-color: #FFFFFF;
+}
+
+.event-all a {
+	text-decoration: none;
+	color: #2F2E2E;
+	width: 100%;
+}
+
+.event-all-date {
+	color: grey;
+}
+
+hr.light {
+	border-top: 1px solid #d3d3d3;
+} 
+
+/*hr.light {
+	border-top: 1px solid #959CB2;
+}*/
+
+hr.hr-yellow-download {
+	border: none;
+	background-color: #E9DB89;
+	height: 3px;
+	width: 50%;
+}
+
+hr.hr-yellow {
+	border: none;
+	background-color: #E9DB89;
+	height: 3px;
+}
+
+.about-welcome-text  {
+	color: #343F64 !important;
+}
+
+.about-teacher-item {
+	text-decoration: none !important;
+}
+
+.about-teacher-block {
+	overflow: hidden;
+	text-align: center;
+	height: 12rem;
+	background-color: #E9DB89;
+	/*padding-top: 5rem;
+	padding-bottom: 5rem;
+	background-color: #E9DB89; 
+	text-align: center;
+	vertical-align: middle; 
+	width: 100%; 
+	font-weight: bold;
+	font-size: 18px; 
+	color: #343F64;*/
+}
+
+.about-teacher-block:hover {
+	background-color: #ece09a !important;
+}
+
+.about-teacher-scuare {
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.about-teacher-title {
+	display: inline-block;
+	max-width: 75%;
+	vertical-align: middle;
+	height: initial;
+	color: #343F64;
+	font-weight: bold;
+	font-size: 18px;
+	/*display: inline-block;
+	max-width: 75%;
+	vertical-align: middle;
+	height: initial;*/
+}
+
+.teacher-preview a {
+	text-decoration: none;
+	color: #2F2E2E;
+	text-align: center;
+}
+
+.teacher-preview a:hover h3 {
+	color: #69718B;
+}
+
+.contact-panel-adress {
+	padding-left: 2rem;
+	font-size: 11pt;
+}
+
+.contact-panel-mail {
+	margin-bottom: 1rem;
+}
+
+.form-group input, textarea {
+	width: 100%;
+	padding: 0.2rem;
+	padding-left: 0.4rem;
+	margin-bottom: 0.5rem;
+	background-color: #FFFFFF;
+	color: #2F2E2E;
+	border: 1px;
+	border-color: #000000;
+	border-style: solid;
+}
+
+/*.form-group input:invalid {
+	border-color: blue;
+}
+
+.form-group textarea:invalid {
+	border-color: blue;
+}*/
+
+.form-group button {
+	background-color: #E9DB89;
+	color: #343F64;
+	margin-top: 0.6rem;
+	border: none;
+}
+
+.form-group button:hover {
+	background-color: #ece09a;
+	color: #343F64;
+}
+
+.form-group button:focus, .form-group button:active {
+	box-shadow: none !important;
+}
+
+.btn-page .btn-outline-info:link {
+	border: none;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-outline-info:visited {
+	box-shadow: none !important;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-outline-info:hover {
+	background-color: #E9DB89 !important;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-outline-info:active,
+.btn-page .btn-outline-info:focus {
+	background-color: #ece09a !important;
+	box-shadow: none !important;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-info:link {
+	border: none;
+	background-color: #E9DB89 !important;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-info:visited {
+	background-color: #E9DB89 !important;
+	box-shadow: none !important;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-info:hover {
+	background-color: #ece09a !important;
+	color: #343F64 !important;
+}
+
+.btn-page .btn-info:active,
+.btn-page .btn-info:focus {
+	background-color: #ece09a !important;
+	box-shadow: none !important;
+	color: #343F64 !important;
+}
+
+
+/*.event-more-btn:hover {
+	background-color: #ece09a;
+}
+
+.event-more-btn:focus, .event-more-btn:active {
+	box-shadow: none !important;
+}*/
+
+/*.event-all-preview hr{
+	height: 5px;
+}*/
+
+/*.event-all-preview {
+	padding: 0rem;
+	margin: 0.3rem;
+}*/
+
+
+
+/* .button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}*/
+
+
+
+/*
+FILE FORMAT ICONS
+by Greg Schoppe (http://gschoppe.com)
+USAGE: include FontAwesome on page, as shown on http://fontawesome.io
+       then include this css file, and target links by adding the link-icon
+       class.  Note: try to avoid or manually label links to websites, as that
+       detection code is necessarily janky. when in doubt, just end all external
+       links with a trailing slash (/), a query string (?), or a link target (#)
+*/
+
+
+
+

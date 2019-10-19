@@ -16,7 +16,7 @@ class Generation():
 																child))
 
 	def get_parents(self):
-		self.parents = np.load("parents.npy")
+		self.parents = np.load("parents.npy", allow_pickle = True)
 		
 	def parents_selection(self):
 		# parent_1 = random.randint(0, self.population-1)

@@ -33,3 +33,5 @@ layer_2 = np.dot(layer_1, weights_2)
 print("layer_2:\n", layer_2)
 
 
+
+

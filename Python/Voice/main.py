@@ -10,7 +10,7 @@ Y = pd.AudioSegment.from_wav("У.wav")
 G = pd.AudioSegment.from_wav("Г.wav")
 
 # word = D + R + Y + G
-word = G + R + Y + D
+word = D + R + Y + G
 word.export("word.wav", format="wav")
 
 pygame.mixer.init()

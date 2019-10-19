@@ -83,8 +83,8 @@ public:
 		Color temp_color = main_color;
 
 		angle_current = angle_start;
-		//angle_step = 360.f / N * 2 + 3.5; // 3.6 for 100 // 3.5 for 200
-		angle_step = 360.f / N;
+		angle_step = 360.f / N * 2 + 3.6; // 3.6 for 100 // 3.5 for 200
+		//angle_step = 360.f / N;
 		elements.clear();
 		float x;
 		float y;
@@ -143,7 +143,7 @@ int main () {
 
 	SortGraph bubble(&window);
 
-	int N = 360; // 100
+	int N = 100; // 100
 	float *arr = new float[N];
 
 	srand(time(NULL));
@@ -160,7 +160,7 @@ int main () {
 			if (arr[j] > arr[j+1])
 				swap(arr[j], arr[j+1]);*/
 
-	int max_wait = 0;
+	int max_wait = 40;
 	int wait = 0;
 	int bi = N-1;
 	int bj = 0;

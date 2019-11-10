@@ -9,7 +9,9 @@ class Net():
 
 	def get_direction(self, input):
 		output = self.sigmoid(np.dot(input, self.weights))
-		direction = np.where(output == np.amax(output))[0][0]
+		#direction = np.where(output == np.amax(output))[0][0]
+		direction = [int((output[0] - output[1])*5), 
+					int((output[2] - output[3])*5)]
 		return direction;
 
 	def sigmoid(self, x):
@@ -20,7 +22,7 @@ class Net():
 		for i in range(self.weights.shape[0]):
 			for j in range(self.weights.shape[1]):
 				if random.random() < probability:
-					self.weights[i][j] = random.uniform(-2.0, 2.0) 
+					self.weights[i][j] += random.uniform(-1.0, 1.0) 
 
 class Dot():
 	def __init__(self, screen, width, height, aim, dot):
@@ -52,10 +54,10 @@ class Dot():
 	def fitness(self):
 		score = (abs(self.position[0] - self.aim["position"][0]) + 
 				 abs(self.position[1] - self.aim["position"][1]))
-		score = self.width + self.height - score
+		score = self.steps/score
 		if self.win:
 			score *= 2
-		return score
+		return int(score)
 
 	def reset(self):
 		self.position = self.dot["position"]
@@ -67,15 +69,18 @@ class Dot():
 		if self.alive and not self.win:
 			self.steps += 1
 			direction = self.brain.get_direction(self.form_input())
-			if direction == 0:
-				acceleration = [0, -self.dot["velocity"]]
-			elif direction == 1:
-				acceleration = [0, self.dot["velocity"]]
-			elif direction == 2:
-				acceleration = [-self.dot["velocity"], 0]
-			else:
-				acceleration = [self.dot["velocity"], 0]
-			self.position = [x + y for x, y in zip(self.position, acceleration)]
+			acceleration = direction
+			# if direction == 0:
+			# 	acceleration = [0, -self.dot["velocity"]]
+			# elif direction == 1:
+			# 	acceleration = [0, self.dot["velocity"]]
+			# elif direction == 2:
+			# 	acceleration = [-self.dot["velocity"], 0]
+			# else:
+			# 	acceleration = [self.dot["velocity"], 0]
+			#self.position = [x + y for x, y in zip(self.position, acceleration)]
+			self.position = [self.position[0]+acceleration[0],
+							 self.position[1]+acceleration[1]]
 
 		if (self.position[0] <= 0 or self.position[0] >= self.width or
 			self.position[1] <= 0 or self.position[1] >= self.height):
@@ -191,7 +196,7 @@ AIM = {
 }
 DOT = {
 	"color": (0, 0, 0), 
-	"position": [int(WIDTH/4), HEIGHT-50],
+	"position": [int(WIDTH/1.5), HEIGHT-50],
 	"radius": 3,
 	"velocity": 5
 }

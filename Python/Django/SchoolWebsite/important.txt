@@ -1,0 +1,11 @@
+Домен - nic.ua
+Данные - aws.amazon.com (с больший буквы, 8 символов)
+Хостинг - heroku.com (с маленькой буквы, пароль 9 символов, в конце знак !)
+SSL - cloudflare.com
+SMTP - SendGrid
+API KEY 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
+
+
+Если после пуша изменения не применяются, надо выполнить purge cache на cloudflare
+
+

@@ -1,7 +1,7 @@
 boto3==1.9.234
 botocore==1.12.234
 dj-database-url==0.5.0
-Django==2.2.2
+Django==2.2.8
 django-crispy-forms==1.7.2
 django-filebrowser-no-grappelli==3.7.8
 django-fluent-contents==2.0.5

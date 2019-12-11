@@ -61,9 +61,9 @@ string Normalize (string problem) {
 	for (int i = 0; i < problem.length(); i++) {
 		if (problem[i] == ' ')
 			continue;
-		if (i)
-			if ((Is_number(problem[i-1]) || problem[i-1] == ')') && 
-				(Is_number(problem[i])   || problem[i]   == '('  || problem[i] == '!'))
+		if (!normalized.empty())
+			if ((Is_number(normalized.back()) || normalized.back() == ')') && 
+				(Is_number(problem[i]) || problem[i] == '(' || problem[i] == '!'))
 				normalized.append("*");
 
 		normalized.append(string(1, problem[i]));

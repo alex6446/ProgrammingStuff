@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <sstream>
 #include <cmath>
 
 using namespace std;
@@ -34,8 +33,8 @@ bool Is_operation (char digit) {
 int Priority (char operation) {
 	switch (operation) {
 		case '|': return 1;
-		case '>': 
 		case '~': return 2;
+		case '>': 
 		case '<': return 3;
 		case 'v': return 4; 
 		case '*': return 5;
@@ -170,7 +169,6 @@ int main () {
 
 	string variables;
 	string problem;
-	istringstream stream;
 	string translated;
 	string substituted;
 	

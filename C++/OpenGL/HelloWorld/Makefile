@@ -1,8 +1,31 @@
-output: main.o
-	g++ main.o -o output -lglfw -lGLEW -lGLU -lGL -lsoil2
+CXX 		= g++
+CXXEXT 		= cpp
+CXXFLAGS	= 
 
-main.o: main.cpp
-	g++ -c main.cpp
+SOURCE_PATH = Source
+BUILD_PATH 	= Build
 
+LIBRARIES	= -lglfw -lGLEW -lGLU -lGL
+INCLUDE		= 
+
+TARGET 		= run
+SOURCES 	= $(shell find $(SOURCE_PATH) -type f -name *.$(CXXEXT))
+OBJECTS 	= $(SOURCES:$(SOURCE_PATH)/%.$(CXXEXT)=$(BUILD_PATH)/%.o)
+
+
+all: directory $(TARGET)
+	./$(TARGET)
+
+.PHONY: directory
+directory:
+	@mkdir -p $(BUILD_PATH)
+
+$(TARGET): $(OBJECTS)
+	$(CXX) $^ -o $(TARGET) $(LIBRARIES)
+
+$(BUILD_PATH)/%.o: $(SOURCE_PATH)/%.$(CXXEXT)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
+
+.PHONY: clean
 clean:
-	rm *.o output
+	rm -r $(BUILD_PATH) $(TARGET) 

@@ -1,6 +1,6 @@
-CXX 		= g++
+CXX 		= clang++
 CXXEXT 		= cpp
-CXXFLAGS	= 
+CXXFLAGS	= -std=c++17 -Wall
 
 SOURCE_PATH = Source
 BUILD_PATH 	= Build

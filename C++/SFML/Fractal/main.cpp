@@ -125,7 +125,7 @@ int main()
 	VideoMode::getDesktopMode().height/2 - window.getSize().y/2));
 	window.setFramerateLimit(60);
 
-	Fractal fractal(&window, 20000, 1);
+	Fractal fractal(&window, 200000, 1);
 
     while (window.isOpen()) {
 		Event event;

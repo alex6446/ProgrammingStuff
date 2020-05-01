@@ -7,7 +7,7 @@ FPS = 15
 
 BACKGROUND_COLOR = (0, 0, 0)
 scale = 0.1
-numbers = 10000000
+numbers = 1000000
 prime_numbers = [2, 3]
 
 def get_position(number):

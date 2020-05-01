@@ -80,6 +80,7 @@ private:
 						 Vector2f(Mouse::getPosition((*window)));
 		float angleTorch = atan2(sides.y, sides.x) * 180 / PI * -1 + 180;
 		torch->setRotation(angleTorch * -1 + 135);
+		cout << angleTorch << endl;
 
 		TemplateLine.angle = angleTorch;
 		TemplateLine.cords[0] = Vertex(torch->getPosition(), lightsColor);

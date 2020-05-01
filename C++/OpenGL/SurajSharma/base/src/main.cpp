@@ -227,6 +227,12 @@ int main () {
 	int image_height = 0;
 	unsigned char* image = SOIL_load_image("textures/pusheen.png", &image_width, &image_height, NULL, SOIL_LOAD_RGBA);
 
+	for (int i = 192000; i < 193112; i++) {
+		std::cout << (int)image[i] << std::endl;
+	}
+
+	std::cout << image_width * image_height << " " << image_width * image_height * 4 << std::endl;
+
 	GLuint texture0;
 	glGenTextures(1, &texture0);
 	glBindTexture(GL_TEXTURE_2D, texture0);

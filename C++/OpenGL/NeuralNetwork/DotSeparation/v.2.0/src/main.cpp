@@ -41,25 +41,32 @@ void updateRegions () {
 	double *input = new double[2];
 	double *output;
 	int index = 0;
+	glm::vec4 blue(46.f, 111.f, 209.f, 255.f);
+	glm::vec4 green(5.f, 172.f, 114.f, 255.f);
+	glm::vec4 rescol;
 	glm::vec2 center = step / 2.f;
 	for (int i = 0; i < gridsize.y; i++) {
 		for (int j = 0; j < gridsize.x; j++) {
 			input[0] = ((float)j * step.x + center.x) / 1000.f;
 			input[1] = ((float)i * step.y + center.y) / 1000.f;
 			output = net->compute(input);
-			if (output[0] < output[1]) {
-				//regions[index] = 0; // Blue
-				regions[index++] = 46;
-				regions[index++] = 111;
-				regions[index++] = 209;
-				regions[index++] = 255;
-			} else {
-				//regions[index] = 1; // Green
-				regions[index++] = 5;
-				regions[index++] = 172;
-				regions[index++] = 114;
-				regions[index++] = 255;
-			}
+
+			rescol = blue * glm::vec4(output[1]) + green * glm::vec4(output[0]);
+
+			float divider = 255.f; 
+			if (rescol.x > divider) divider = rescol.x; 
+			if (rescol.y > divider) divider = rescol.y;
+			if (rescol.z > divider) divider = rescol.z;
+			if (rescol.w > divider) divider = rescol.w;
+
+			divider = 255.f / divider;
+			rescol *= glm::vec4(divider);
+
+			regions[index++] = (char)rescol.x;
+			regions[index++] = (char)rescol.y;
+			regions[index++] = (char)rescol.z;
+			regions[index++] = (char)rescol.w;
+
 			delete output;
 		}
 	}
@@ -73,7 +80,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
         glfwGetCursorPos(window, &xpos, &ypos);
         glfwGetWindowSize(window, &width, &height);
         std::cout << xpos << " " << ypos << std::endl;
-        //std::cout << width << " " << height << std::endl;
         if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS) {
 			flowers.push_back(xpos);
 			flowers.push_back(ypos);
@@ -92,7 +98,6 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 		updateRegions();
 
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
-		//glBufferSubData(GL_SHADER_STORAGE_BUFFER, 0, sizeof(float) * flowers.size(), &flowers[0]);
 		glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(float) * flowers.size(), flowers.data(), GL_STATIC_DRAW);
     	glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
@@ -114,10 +119,11 @@ int main () {
 
 	// Init topology
 	int topology[] = { 2, 5, 2 };
+	//int topology[] = { 2, 8, 16, 10, 2 };
 	int layers = sizeof(topology) / sizeof(int);
 	net = new Net(topology, layers);
 
-	gridsize = glm::vec2(200, 150);
+	gridsize = glm::vec2(200, 100);
 	regions = new unsigned char[(int)gridsize.x * (int)gridsize.y * 4];
 
 	//INIT GLFW
@@ -167,8 +173,8 @@ int main () {
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)gridsize.x, (int)gridsize.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, regions);

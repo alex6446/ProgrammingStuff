@@ -48,7 +48,7 @@ void updateRegions () {
 			input[1] = ((float)i * step.y + center.y) / 1000.f;
 			output = net->compute(input);
 			if (output[0] < output[1]) {
-				//regions[i] = 0; // Blue
+				//regions[index] = 0; // Blue
 				regions[index++] = 46;
 				regions[index++] = 111;
 				regions[index++] = 209;

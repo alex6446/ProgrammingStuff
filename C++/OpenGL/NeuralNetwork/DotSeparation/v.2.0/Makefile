@@ -7,7 +7,7 @@ INC_DIR			= include
 LIB_DIR 		= libs
 BUILD_DIR 		= build
 
-LIBS			= -lglfw -lGLEW -lGLU -lGL -lsoil2
+LIBS			= -lglfw -lGLEW -lGL
 
 COMPILE_FLAGS 	= $(INC_DIR:%=-I %) $(CXXFLAGS)
 LINKING_FLAGS 	= $(LIB_DIR:%=-L %) $(LIB_DIR:%=-Wl,-rpath %) $(LIBS)

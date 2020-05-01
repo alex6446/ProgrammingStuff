@@ -203,7 +203,7 @@ int main () {
     	step = resolution / gridsize;
 
 		// Teach nueral network
-		net->startLearning(2000);
+		net->startLearning(200);
 		updateRegions();
 
 		// Update texture

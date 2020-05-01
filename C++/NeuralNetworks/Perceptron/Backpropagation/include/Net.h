@@ -12,6 +12,7 @@ private:
 
 	double** inputs;
 	double** outputs;
+	double* result;
 	int size;
 
 public:
@@ -20,7 +21,10 @@ public:
 	~Net ();
 
 	void setLearningData (double** inputs, double** outputs, int size);
+	void setLearningData (double* data, int size);
 	void startLearning (double accuracy);
+	void startLearning (int iterations);
+	void reset ();
 
 	double* compute (double* input);
 

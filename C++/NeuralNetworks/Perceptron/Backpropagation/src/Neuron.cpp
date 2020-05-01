@@ -59,3 +59,8 @@ void Neuron::backPropagation () {
 double Neuron::sigmoid (double net) {
 	return 1 / (1 + exp(-net));
 }
+
+void Neuron::reset () {
+	for (int i = 0; i < T; i++)
+		this->weights[i] = -2.0 + (double)rand() / RAND_MAX * 4.0;
+}

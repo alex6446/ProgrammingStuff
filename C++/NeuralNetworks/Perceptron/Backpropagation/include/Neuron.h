@@ -15,6 +15,7 @@ public:
 	Neuron ();
 	~Neuron ();
 	void init (int T, Neuron* neurons);
+	void reset ();
 
 	void addDelta (double value);
 	double getOut ();

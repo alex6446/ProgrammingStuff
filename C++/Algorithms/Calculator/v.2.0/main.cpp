@@ -70,8 +70,8 @@ vector<string> Normalize (string problem) {
 
 	for (int i = 0; i < problem.size();) {
 		if (problem[i] == ' ') {
-			continue;
 			i++;
+			continue;
 		}
 		if (isNum(problem[i])) {
 			while (isNum(problem[i])) {

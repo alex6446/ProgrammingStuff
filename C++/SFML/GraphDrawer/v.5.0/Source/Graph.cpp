@@ -15,7 +15,7 @@ Graph::Graph (int width, int height, string title) {
 	StartSelected = false;
 	InputWaiting = false;
 	ConnectionIsActive = false;
-	window.create(VideoMode(width, height), title);
+	window.create(VideoMode(width, height), title, sf::Style::Close);
 	window.setPosition(Vector2i(
 		VideoMode::getDesktopMode().width/2 - window.getSize().x/2,
 		VideoMode::getDesktopMode().height/2 - window.getSize().y/2));

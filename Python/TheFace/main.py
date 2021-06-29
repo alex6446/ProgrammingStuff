@@ -56,15 +56,15 @@ mytext = """
 # (англ. The Enchanted Island). В постановках принимали участие Дэвид Гаррик, Томас Шедуэлл, Дж. Кембл и др. 
 # В оригинале шла несколько раз в 1746 году в «Друри-Лейн» (Лондон).
 # """
-
+# mytext = "вас приветствует система голосовых команд амадэус. вы находитесь на сайте лабораторной работы №4"
 while mytext != "":
-	mytex = input("Введите текст: ")
+	mytext = input("Введите текст: ")
 	language = 'ru'
 	myobj = gTTS(text=mytext, lang=language, slow=False) 
 	myobj.save("welcome.mp3") 
 
 	sound = AudioSegment.from_file('welcome.mp3', format="mp3")
-	octaves = 0.25
+	octaves = 0.35
 	new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
 	hipitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
 	hipitch_sound = hipitch_sound.set_frame_rate(44100)
